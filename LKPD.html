@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LKPD — Sistem Tata Surya (Kelas 9)</title>
+<style>
+  :root { --garis: #b9c2cf; --aksen: #1d4ed8; --redup: #5b6675; }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 28px 22px 60px;
+    background: #f2f4f8; color: #14181f;
+    font-family: "Segoe UI", system-ui, Arial, sans-serif;
+    font-size: 13.2px; line-height: 1.62;
+  }
+  .halaman {
+    max-width: 860px; margin: 0 auto; background: #fff;
+    padding: 34px 38px 44px; border-radius: 6px;
+    box-shadow: 0 4px 22px rgba(15, 23, 42, 0.13);
+  }
+  header { border-bottom: 3px double #14181f; padding-bottom: 13px; margin-bottom: 18px; }
+  .kop { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; flex-wrap: wrap; }
+  .sekolah { font-size: 11.5px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--redup); font-weight: 700; }
+  h1 { font-size: 20px; margin: 4px 0 2px; letter-spacing: 0.2px; }
+  .sub { font-size: 12.4px; color: var(--redup); }
+  .identitas { display: grid; grid-template-columns: repeat(2, minmax(190px, 1fr)); gap: 7px 20px; margin: 16px 0 20px; }
+  .identitas div { display: flex; gap: 8px; align-items: flex-end; font-size: 12.6px; }
+  .identitas span { flex: none; }
+  .identitas i { flex: 1; border-bottom: 1px dotted #7d8899; height: 17px; }
+
+  h2 {
+    font-size: 14.2px; margin: 26px 0 9px; padding: 7px 12px;
+    background: #eaf0fd; border-left: 4px solid var(--aksen); border-radius: 0 6px 6px 0;
+  }
+  h3 { font-size: 13.2px; margin: 15px 0 6px; }
+  ol, ul { margin: 6px 0 6px; padding-left: 22px; }
+  li { margin-bottom: 5px; }
+  p { margin: 6px 0; }
+
+  .tujuan { background: #f7f9fc; border: 1px solid var(--garis); border-radius: 8px; padding: 12px 16px; margin-bottom: 6px; }
+  .tujuan ol { margin: 4px 0 0; }
+
+  .petunjuk { background: #fff8e8; border: 1px solid #e8d5a8; border-radius: 8px; padding: 12px 16px; font-size: 12.6px; }
+  .petunjuk b { color: #8a5a00; }
+
+  table { width: 100%; border-collapse: collapse; margin: 9px 0; font-size: 12.4px; }
+  th, td { border: 1px solid var(--garis); padding: 7px 9px; vertical-align: top; }
+  th { background: #eef2f8; font-size: 11.6px; text-transform: uppercase; letter-spacing: 0.4px; text-align: left; }
+  td.kosong { height: 26px; }
+  .tengah { text-align: center; }
+  .sempit { width: 92px; }
+
+  .jwb { border-bottom: 1px dotted #7d8899; display: inline-block; min-width: 120px; }
+  .garis-jwb { height: 24px; border-bottom: 1px dotted #7d8899; margin: 5px 0; }
+  .garis-jwb.pendek { height: 20px; }
+
+  .kunci { page-break-before: always; }
+  .kunci h2 { background: #fdeaea; border-left-color: #c0392b; }
+  .kunci .catatan { background: #fff4f4; border: 1px solid #edc9c9; border-radius: 8px; padding: 11px 15px; font-size: 12.4px; }
+
+  .kotak-ttd { margin-top: 34px; display: flex; justify-content: space-between; gap: 40px; font-size: 12.4px; }
+  .kotak-ttd div { flex: 1; text-align: center; }
+  .ruang-ttd { height: 62px; }
+
+  .cetak { position: fixed; right: 20px; bottom: 20px; background: var(--aksen); color: #fff; border: none;
+           padding: 12px 20px; border-radius: 999px; font-size: 13px; font-weight: 600; cursor: pointer;
+           box-shadow: 0 6px 18px rgba(29, 78, 216, 0.4); font-family: inherit; }
+  .cetak:hover { background: #1740b8; }
+
+  @media print {
+    body { background: #fff; padding: 0; font-size: 11.6px; }
+    .halaman { box-shadow: none; border-radius: 0; max-width: none; padding: 0 6mm; }
+    .cetak { display: none; }
+    h2 { page-break-after: avoid; }
+    table { page-break-inside: avoid; }
+    @page { size: A4; margin: 13mm 12mm; }
+  }
+</style>
+</head>
+<body>
+
+<div class="halaman">
+
+  <header>
+    <div class="kop">
+      <div>
+        <div class="sekolah">Sekolah Nasional Plus</div>
+        <h1>Lembar Kerja Peserta Didik (LKPD)</h1>
+        <div class="sub">Mata Pelajaran: Ilmu Pengetahuan Alam · Kelas IX<br>
+        Materi: Sistem Tata Surya</div>
+      </div>
+      <div style="text-align:right;font-size:11.6px;color:#5b6675">
+        Nama Simulasi:<br><b style="font-size:12.6px;color:#14181f">Tata Surya Kita</b><br>
+        (berkas <i>index.html</i>)
+      </div>
+    </div>
+  </header>
+
+  <div class="identitas">
+    <div><span>Nama</span><i></i></div>
+    <div><span>Kelas</span><i></i></div>
+    <div><span>Nomor absen</span><i></i></div>
+    <div><span>Tanggal</span><i></i></div>
+  </div>
+
+  <h2>Tujuan Pembelajaran</h2>
+  <div class="tujuan">
+    <ol>
+      <li>Mengidentifikasi anggota Tata Surya dan mengurutkan planet berdasarkan jaraknya dari Matahari.</li>
+      <li>Membedakan rotasi dan revolusi beserta akibat yang ditimbulkannya.</li>
+      <li>Mengklasifikasikan planet menjadi planet dalam dan planet luar berdasarkan sifat fisisnya.</li>
+      <li>Menganalisis hubungan jarak planet dengan periode revolusinya (Hukum Kepler).</li>
+      <li>Menjelaskan alasan gambar Tata Surya pada buku tidak digambarkan sesuai skala sebenarnya.</li>
+    </ol>
+  </div>
+
+  <h2>Petunjuk Penggunaan</h2>
+  <div class="petunjuk">
+    <b>1.</b> Buka berkas <b>index.html</b> dengan klik dua kali, lalu tunggu sampai simulasi tampil.<br>
+    <b>2.</b> <b>Seret</b> layar untuk memutar pandangan, <b>gulir</b> untuk memperbesar, dan <b>klik planet</b> untuk membaca datanya.<br>
+    <b>3.</b> Gunakan kolom <b>Tanggal simulasi</b> di bagian atas untuk mengubah posisi planet.<br>
+    <b>4.</b> Tuliskan jawaban pada tempat yang tersedia dengan rapi dan lengkap.
+  </div>
+
+  <h2>Kegiatan A — Mengenal Anggota Tata Surya</h2>
+  <p><b>Langkah:</b> Klik setiap planet pada daftar <i>Benda Langit</i>, lalu lengkapi tabel berikut.</p>
+  <table>
+    <thead>
+      <tr>
+        <th class="sempit">Urutan dari Matahari</th>
+        <th>Nama Planet</th>
+        <th class="sempit">Jenis<br>(berbatu / gas / es)</th>
+        <th>Periode Revolusi</th>
+        <th class="sempit">Jumlah Satelit</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td class="tengah">1</td><td class="kosong"></td><td></td><td></td><td></td></tr>
+      <tr><td class="tengah">2</td><td class="kosong"></td><td></td><td></td><td></td></tr>
+      <tr><td class="tengah">3</td><td class="kosong"></td><td></td><td></td><td></td></tr>
+      <tr><td class="tengah">4</td><td class="kosong"></td><td></td><td></td><td></td></tr>
+      <tr><td class="tengah">5</td><td class="kosong"></td><td></td><td></td><td></td></tr>
+      <tr><td class="tengah">6</td><td class="kosong"></td><td></td><td></td><td></td></tr>
+      <tr><td class="tengah">7</td><td class="kosong"></td><td></td><td></td><td></td></tr>
+      <tr><td class="tengah">8</td><td class="kosong"></td><td></td><td></td><td></td></tr>
+    </tbody>
+  </table>
+  <p><b>Pertanyaan:</b></p>
+  <ol>
+    <li>Planet manakah yang paling besar? Berapa kali diameter Bumi?
+      <div class="garis-jwb"></div></li>
+    <li>Planet manakah yang paling panas? Mengapa demikian, padahal bukan yang terdekat dengan Matahari?
+      <div class="garis-jwb"></div><div class="garis-jwb"></div></li>
+    <li>Sebutkan satu planet yang berputar berlawanan arah (retrograde) dan jelaskan akibatnya.
+      <div class="garis-jwb"></div><div class="garis-jwb"></div></li>
+  </ol>
+
+  <h2>Kegiatan B — Rotasi dan Revolusi</h2>
+  <p><b>Langkah:</b> Atur kecepatan waktu menjadi <b>1 hari/detik</b>, lalu klik Bumi. Amati gerakannya.
+     Setelah itu ubah kecepatan menjadi <b>30 hari/detik</b> dan amati kembali.</p>
+  <table>
+    <thead><tr><th>Aspek</th><th>Rotasi</th><th>Revolusi</th></tr></thead>
+    <tbody>
+      <tr><td>Pengertian</td><td class="kosong"></td><td></td></tr>
+      <tr><td>Periode pada Bumi</td><td></td><td></td></tr>
+      <tr><td>Akibat yang ditimbulkan</td><td></td><td></td></tr>
+    </tbody>
+  </table>
+  <ol>
+    <li>Sekarang pilih planet <b>Venus</b>. Berapa periode rotasinya menurut simulasi? Apa yang istimewa dari nilai tersebut?
+      <div class="garis-jwb"></div><div class="garis-jwb"></div></li>
+    <li>Pilih planet <b>Uranus</b>. Berapa kemiringan sumbunya? Apa akibat kemiringan tersebut bagi musim di Uranus?
+      <div class="garis-jwb"></div><div class="garis-jwb"></div></li>
+  </ol>
+
+  <h2>Kegiatan C — Planet Dalam dan Planet Luar</h2>
+  <p>Perhatikan <b>Tabel data lengkap</b> pada simulasi, kemudian jawab pertanyaan berikut.</p>
+  <table>
+    <thead><tr><th>Pembeda</th><th>Planet Dalam</th><th>Planet Luar</th></tr></thead>
+    <tbody>
+      <tr><td>Anggota</td><td class="kosong"></td><td></td></tr>
+      <tr><td>Ukuran</td><td></td><td></td></tr>
+      <tr><td>Penyusun utama</td><td></td><td></td></tr>
+      <tr><td>Jumlah satelit</td><td></td><td></td></tr>
+      <tr><td>Cincin</td><td></td><td></td></tr>
+    </tbody>
+  </table>
+  <ol>
+    <li>Benda langit apa yang memisahkan planet dalam dan planet luar? Dari bahan apa benda tersebut tersusun?
+      <div class="garis-jwb"></div></li>
+    <li>Mengapa Jupiter dan Saturnus disebut raksasa gas, sedangkan Uranus dan Neptunus disebut raksasa es?
+      <div class="garis-jwb"></div><div class="garis-jwb"></div></li>
+  </ol>
+
+  <h2>Kegiatan D — Menyelidiki Jarak Bumi ke Matahari</h2>
+  <p><b>Langkah:</b></p>
+  <ol>
+    <li>Klik planet <b>Bumi</b> pada daftar <i>Benda Langit</i>.</li>
+    <li>Ubah <b>Tanggal simulasi</b> sesuai tabel di bawah.</li>
+    <li>Catat angka <b>“Jarak dari Matahari (juta km)”</b> yang tampil pada panel informasi di sebelah kanan.</li>
+  </ol>
+  <table>
+    <thead>
+      <tr><th>Tanggal simulasi</th><th>Jarak dari Matahari (juta km)</th><th>Jarak dalam SA</th><th>Keterangan</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>3 Januari 2025</td><td class="kosong"></td><td></td><td>terdekat / terjauh / sedang</td></tr>
+      <tr><td>3 April 2025</td><td></td><td></td><td></td></tr>
+      <tr><td>4 Juli 2025</td><td></td><td></td><td></td></tr>
+      <tr><td>5 Oktober 2025</td><td></td><td></td><td></td></tr>
+    </tbody>
+  </table>
+  <ol>
+    <li>Pada tanggal berapa Bumi paling dekat dengan Matahari? Pada tanggal berapa paling jauh?
+      <div class="garis-jwb"></div></li>
+    <li>Apakah jarak Bumi ke Matahari selalu tetap? Bentuk orbit apakah yang sesuai dengan hasil pengamatanmu?
+      <div class="garis-jwb"></div><div class="garis-jwb"></div></li>
+    <li>Bandingkan periode revolusi <b>Merkurius</b> dan <b>Neptunus</b>. Apa hubungan antara jarak planet dari Matahari
+        dengan periode revolusinya? (Ini disebut Hukum III Kepler.)
+      <div class="garis-jwb"></div><div class="garis-jwb"></div></li>
+  </ol>
+
+  <h2>Kegiatan E — Uji Pemahaman</h2>
+  <ol>
+    <li>Jelaskan mengapa Matahari disebut bintang, sedangkan Bumi disebut planet.
+      <div class="garis-jwb"></div><div class="garis-jwb"></div></li>
+    <li>Mengapa gambar Tata Surya pada buku pelajaran biasanya tidak digambarkan sesuai skala sebenarnya?
+        Kaitkan jawabanmu dengan mode <b>Terlihat</b> dan mode <b>Nyata</b> pada simulasi.
+      <div class="garis-jwb"></div><div class="garis-jwb"></div><div class="garis-jwb"></div></li>
+    <li>Berapa lama cahaya Matahari sampai ke Bumi? Tunjukkan cara menghitungnya bila jarak Bumi–Matahari 150 juta km
+        dan kecepatan cahaya 300.000 km/detik.
+      <div class="garis-jwb"></div><div class="garis-jwb"></div></li>
+    <li>Fakta apa yang paling menarik bagimu dari simulasi ini? Mengapa?
+      <div class="garis-jwb"></div><div class="garis-jwb"></div></li>
+  </ol>
+  <p><b>Hasil Kuis:</b> Buka menu <b>Kuis (10 soal)</b> pada simulasi, kerjakan, lalu tuliskan skormu:
+     <span class="jwb" style="min-width:80px"></span> &nbsp;/ 100</p>
+
+  <div class="kotak-ttd">
+    <div>Guru Mata Pelajaran<div class="ruang-ttd"></div>(.............................................)</div>
+    <div>Orang Tua / Wali<div class="ruang-ttd"></div>(.............................................)</div>
+  </div>
+
+  <!-- ================= KUNCI JAWABAN ================= -->
+  <section class="kunci">
+    <h2>Kunci Jawaban dan Rubrik Penilaian <span style="font-weight:400;font-size:11.5px">(untuk guru — pisahkan sebelum dicetak untuk siswa)</span></h2>
+
+    <h3>Kegiatan A</h3>
+    <table>
+      <thead><tr><th class="sempit">Urutan</th><th>Planet</th><th>Jenis</th><th>Periode revolusi</th><th class="sempit">Satelit</th></tr></thead>
+      <tbody>
+        <tr><td class="tengah">1</td><td>Merkurius</td><td>Berbatu (terestrial)</td><td>88 hari</td><td class="tengah">0</td></tr>
+        <tr><td class="tengah">2</td><td>Venus</td><td>Berbatu (terestrial)</td><td>225 hari</td><td class="tengah">0</td></tr>
+        <tr><td class="tengah">3</td><td>Bumi</td><td>Berbatu (terestrial)</td><td>365¼ hari</td><td class="tengah">1</td></tr>
+        <tr><td class="tengah">4</td><td>Mars</td><td>Berbatu (terestrial)</td><td>687 hari</td><td class="tengah">2</td></tr>
+        <tr><td class="tengah">5</td><td>Jupiter</td><td>Raksasa gas</td><td>± 11,9 tahun</td><td class="tengah">95</td></tr>
+        <tr><td class="tengah">6</td><td>Saturnus</td><td>Raksasa gas</td><td>± 29,5 tahun</td><td class="tengah">146</td></tr>
+        <tr><td class="tengah">7</td><td>Uranus</td><td>Raksasa es</td><td>± 84 tahun</td><td class="tengah">28</td></tr>
+        <tr><td class="tengah">8</td><td>Neptunus</td><td>Raksasa es</td><td>± 165 tahun</td><td class="tengah">16</td></tr>
+      </tbody>
+    </table>
+    <ol>
+      <li><b>Jupiter</b>, diameternya ± 11 kali diameter Bumi (142.984 km : 12.742 km).</li>
+      <li><b>Venus</b> (464 °C). Karena atmosfernya 96% karbon dioksida sehingga terjadi efek rumah kaca yang sangat kuat — panas terperangkap dan tidak dapat keluar.</li>
+      <li><b>Venus</b> (dan Uranus, yang sumbunya miring 98°). Akibatnya Venus berputar berlawanan arah sehingga Matahari terbit dari barat dan satu harinya (243 hari) lebih lama daripada satu tahunnya (225 hari).</li>
+    </ol>
+
+    <h3>Kegiatan B</h3>
+    <table>
+      <thead><tr><th>Aspek</th><th>Rotasi</th><th>Revolusi</th></tr></thead>
+      <tbody>
+        <tr><td>Pengertian</td><td>Perputaran benda langit pada porosnya (sumbunya)</td><td>Peredaran benda langit mengelilingi Matahari</td></tr>
+        <tr><td>Periode pada Bumi</td><td>± 24 jam (23 jam 56 menit)</td><td>± 365¼ hari (1 tahun)</td></tr>
+        <tr><td>Akibat</td><td>Pergantian siang dan malam; perbedaan waktu di berbagai tempat; pembelokan arah angin</td><td>Pergantian musim (bersama kemiringan sumbu 23,44°); perbedaan lama siang dan malam; perubahan rasi bintang yang tampak</td></tr>
+      </tbody>
+    </table>
+    <ol>
+      <li>Venus: rotasinya <b>–5.832,5 jam</b> (243 hari Bumi) dan bernilai negatif. Artinya Venus berputar <b>terbalik (retrograde)</b> — berlawanan dengan arah revolusinya — dan satu hari di Venus lebih lama daripada satu tahunnya.</li>
+      <li>Uranus: kemiringan sumbu <b>97,77°</b> (hampir berbaring). Akibatnya kutub Uranus menghadap Matahari selama ± 42 tahun lalu gelap selama ± 42 tahun, sehingga satu musim berlangsung sekitar 21 tahun.</li>
+    </ol>
+
+    <h3>Kegiatan C</h3>
+    <table>
+      <thead><tr><th>Pembeda</th><th>Planet Dalam</th><th>Planet Luar</th></tr></thead>
+      <tbody>
+        <tr><td>Anggota</td><td>Merkurius, Venus, Bumi, Mars</td><td>Jupiter, Saturnus, Uranus, Neptunus</td></tr>
+        <tr><td>Ukuran</td><td>Kecil (diameter &lt; 13.000 km)</td><td>Sangat besar (diameter 50.000–143.000 km)</td></tr>
+        <tr><td>Penyusun utama</td><td>Batuan dan logam (padat)</td><td>Gas hidrogen–helium dan es</td></tr>
+        <tr><td>Jumlah satelit</td><td>Sedikit (0–2)</td><td>Banyak (16–146 atau lebih)</td></tr>
+        <tr><td>Cincin</td><td>Tidak ada</td><td>Semuanya memiliki cincin (paling jelas pada Saturnus)</td></tr>
+      </tbody>
+    </table>
+    <ol>
+      <li><b>Sabuk asteroid</b>, tersusun dari batuan dan logam (besi, nikel) berbentuk bongkahan berbagai ukuran.</li>
+      <li>Jupiter dan Saturnus tersusun terutama dari <b>gas hidrogen dan helium</b> sehingga disebut raksasa gas. Uranus dan Neptunus mengandung lebih banyak <b>es air, amonia, dan metana</b> di samping gas, sehingga disebut raksasa es. Warna biru-hijau Uranus dan Neptunus berasal dari gas metana.</li>
+    </ol>
+
+    <h3>Kegiatan D</h3>
+    <table>
+      <thead><tr><th>Tanggal</th><th>Jarak (juta km)</th><th>Jarak (SA)</th><th>Keterangan</th></tr></thead>
+      <tbody>
+        <tr><td>3 Januari 2025</td><td>± 147,1</td><td>± 0,983</td><td><b>terdekat</b> (perihelion)</td></tr>
+        <tr><td>3 April 2025</td><td>± 149,6</td><td>± 1,000</td><td>sedang</td></tr>
+        <tr><td>4 Juli 2025</td><td>± 152,1</td><td>± 1,017</td><td><b>terjauh</b> (aphelion)</td></tr>
+        <tr><td>5 Oktober 2025</td><td>± 149,6</td><td>± 1,000</td><td>sedang</td></tr>
+      </tbody>
+    </table>
+    <p style="font-size:12.2px;color:#5b6675">Nilai siswa boleh berbeda sedikit (toleransi ± 1 juta km) karena pembulatan pada tampilan simulasi.</p>
+    <ol>
+      <li>Terdekat: <b>3 Januari</b>. Terjauh: <b>4 Juli</b>.</li>
+      <li>Tidak tetap. Jaraknya berubah antara ± 147 juta km dan ± 152 juta km. Orbit Bumi <b>berbentuk elips</b> (Hukum I Kepler) dengan Matahari berada di salah satu titik fokusnya — bukan lingkaran sempurna.</li>
+      <li>Merkurius 88 hari, Neptunus ± 165 tahun. Semakin <b>jauh</b> planet dari Matahari, semakin <b>lama</b> periode revolusinya. Menurut Hukum III Kepler, kuadrat periode sebanding dengan pangkat tiga jarak rata-rata (T² ∝ a³).</li>
+    </ol>
+
+    <h3>Kegiatan E</h3>
+    <ol>
+      <li>Matahari disebut bintang karena <b>memancarkan cahayanya sendiri</b> hasil reaksi fusi nuklir (hidrogen menjadi helium) di intinya. Bumi disebut planet karena <b>tidak memancarkan cahaya sendiri</b> — cahayanya berasal dari pantulan cahaya Matahari — serta mengorbit Matahari dan tidak memiliki reaksi fusi.</li>
+      <li>Karena jarak antarplanet jauh lebih besar daripada ukuran planetnya. Bila digambar sesuai skala pada satu halaman buku, planet akan menjadi titik yang tak terlihat dan Matahari pun sangat kecil. Pada simulasi ini, mode <b>Nyata</b> menunjukkan keadaan sebenarnya (Matahari hanya sebesar titik dan planet praktis tak terlihat), sedangkan mode <b>Terlihat</b> memampatkan jarak dan memperbesar ukuran agar dapat diamati. Gambar pada buku melakukan hal yang sama demi kejelasan.</li>
+      <li>Waktu = jarak : kecepatan = 150.000.000 km : 300.000 km/detik = <b>500 detik = 8 menit 20 detik</b>.</li>
+      <li>Jawaban terbuka. Diterima bila menyebut fakta yang benar dari simulasi (misalnya Bintik Merah Raksasa Jupiter, cincin Saturnus, kemiringan Uranus, rotasi retrograde Venus) disertai alasan yang masuk akal.</li>
+    </ol>
+
+    <h3>Rubrik Penilaian</h3>
+    <table>
+      <thead><tr><th>Bagian</th><th>Skor maksimum</th><th>Indikator</th></tr></thead>
+      <tbody>
+        <tr><td>A — Mengenal anggota Tata Surya</td><td class="tengah">25</td><td>Tabel terisi benar (2 poin per baris) dan 3 pertanyaan terjawab tepat (3 poin per pertanyaan)</td></tr>
+        <tr><td>B — Rotasi dan revolusi</td><td class="tengah">20</td><td>Tabel perbandingan lengkap dan tepat (12 poin) serta 2 pertanyaan (4 poin per pertanyaan)</td></tr>
+        <tr><td>C — Planet dalam dan luar</td><td class="tengah">20</td><td>Tabel klasifikasi (12 poin) dan 2 pertanyaan (4 poin per pertanyaan)</td></tr>
+        <tr><td>D — Penyelidikan jarak</td><td class="tengah">20</td><td>Data pengamatan akurat (12 poin) dan 3 pertanyaan analisis (8 poin)</td></tr>
+        <tr><td>E — Uji pemahaman</td><td class="tengah">15</td><td>Jawaban benar dan beralasan, termasuk perhitungan waktu tempuh cahaya</td></tr>
+        <tr><th>Total</th><th class="tengah">100</th><th>Nilai akhir = skor perolehan</th></tr>
+      </tbody>
+    </table>
+
+    <div class="catatan">
+      <b>Catatan untuk guru:</b> Simulasi ini juga menyediakan fitur <b>Kuis (10 soal)</b> yang dapat
+      dipakai sebagai penilaian cepat. Skor ditampilkan langsung beserta pembahasan setiap soal, sehingga
+      siswa dapat melakukan perbaikan mandiri. Untuk pengayaan, minta siswa membandingkan hasil
+      perhitungan T² ∝ a³ pada Kegiatan D dengan data periode revolusi pada Tabel data lengkap.
+    </div>
+  </section>
+
+</div>
+
+<button class="cetak" onclick="window.print()">🖨️ Cetak / Simpan PDF</button>
+</body>
+</html>
