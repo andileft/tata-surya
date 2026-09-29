@@ -6,6 +6,12 @@ siswa **Sekolah Nasional Plus kelas 9** (dapat diadaptasi untuk kelas 7–9).
 Seluruh simulasi berada dalam **satu berkas** `index.html`. Cukup klik dua kali untuk
 membukanya — **tidak perlu internet, tidak perlu memasang aplikasi apa pun**.
 
+> ### 🔗 Versi daring
+> **https://andileft.github.io/tata-surya/**
+>
+> Dapat langsung dibuka di ponsel, tablet, atau komputer siswa tanpa mengunduh apa pun.
+> Bagikan tautan ini melalui grup kelas atau tempel di bahan ajar.
+
 ---
 
 ## 1. Cara Menjalankan

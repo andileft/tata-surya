@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Simulasi Tata Surya interaktif dengan three.js untuk pembelajaran IPA siswa kelas 9.">
+<meta name="theme-color" content="#04060d">
+<!-- Ikon tab disematkan langsung sebagai SVG agar berkas tetap mandiri
+     (tanpa permintaan berkas tambahan ke server). -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cellipse cx='32' cy='32' rx='29' ry='11' fill='none' stroke='%2359b0ff' stroke-width='3.5' transform='rotate(-22 32 32)'/%3E%3Ccircle cx='32' cy='32' r='12' fill='%23ffb74d'/%3E%3Ccircle cx='57' cy='22' r='5' fill='%237ee0c0'/%3E%3C/svg%3E">
+<title>Simulasi Tata Surya — Pembelajaran IPA Kelas 9</title>
+<style>
+/*__CSS__*/
+</style>
+</head>
+<body>
+
+<!-- ===================== Layar pemuatan ===================== -->
+<div id="pemuat" class="pemuat">
+  <div class="pemuat-kotak">
+    <div class="pemuat-ikon">
+      <div class="orbit-spinner"><span></span><span></span><span></span></div>
+    </div>
+    <h1>Tata Surya Kita</h1>
+    <p class="pemuat-sub">Simulasi 3D untuk pembelajaran IPA Kelas 9</p>
+    <div class="pemuat-bar"><div id="pemuat-isi"></div></div>
+    <p id="pemuat-teks" class="pemuat-teks">Menyiapkan…</p>
+    <p id="pemuat-galat" class="pemuat-galat" hidden></p>
+  </div>
+</div>
+
+<!-- ===================== Panggung 3D ===================== -->
+<div id="panggung">
+  <div id="lapisan-label"></div>
+  <div id="petunjuk-singkat" class="petunjuk-singkat">
+    <strong>Seret</strong> untuk memutar · <strong>Scroll</strong> untuk zoom · <strong>Klik planet</strong> untuk melihat data
+  </div>
+</div>
+
+<!-- ===================== Bilah atas ===================== -->
+<header id="bar-atas">
+  <div class="merek">
+    <span class="merek-titik"></span>
+    <div>
+      <div class="merek-nama">Tata Surya Kita</div>
+      <div class="merek-sub">Simulasi 3D · IPA Kelas 9</div>
+    </div>
+  </div>
+
+  <div class="waktu">
+    <label class="tangguh" for="tanggal-sim">Tanggal simulasi</label>
+    <input type="date" id="tanggal-sim" title="Pilih tanggal untuk melihat posisi planet yang sebenarnya">
+    <button class="tombol-mini" id="btn-hari-ini" title="Kembali ke tanggal hari ini">Hari ini</button>
+  </div>
+
+  <div class="kontrol-waktu">
+    <button class="tombol-ikon" id="btn-main" title="Jalankan / jeda (Spasi)" aria-label="Jalankan atau jeda">
+      <svg viewBox="0 0 24 24" class="ikon-jalan"><path d="M8 5v14l11-7z"/></svg>
+      <svg viewBox="0 0 24 24" class="ikon-jeda" hidden><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>
+    </button>
+    <div class="penggeser">
+      <input type="range" id="kecepatan" min="0" max="100" value="48" aria-label="Kecepatan waktu">
+      <div class="penggeser-info">
+        <span>Kecepatan waktu</span>
+        <strong id="kecepatan-teks">5 hari/detik</strong>
+      </div>
+    </div>
+    <div class="preset">
+      <button data-hari="0.1">Jam</button>
+      <button data-hari="1">Hari</button>
+      <button data-hari="7">Minggu</button>
+      <button data-hari="30">Bulan</button>
+      <button data-hari="365">Tahun</button>
+    </div>
+  </div>
+
+  <div class="aksi-atas">
+    <button class="tombol-ikon" id="btn-reset" title="Kembalikan pandangan (R)" aria-label="Kembalikan pandangan">
+      <svg viewBox="0 0 24 24"><path d="M12 5V2L7 6l5 4V7a5 5 0 1 1-5 5H5a7 7 0 1 0 7-7z"/></svg>
+    </button>
+    <button class="tombol-ikon" id="btn-layar" title="Layar penuh (F)" aria-label="Layar penuh">
+      <svg viewBox="0 0 24 24"><path d="M4 4h6v2H6v4H4V4zm10 0h6v6h-2V6h-4V4zM4 14h2v4h4v2H4v-6zm14 0h2v6h-6v-2h4v-4z"/></svg>
+    </button>
+    <button class="tombol-ikon tombol-bantuan" id="btn-bantuan" title="Bantuan & pintasan (H)" aria-label="Bantuan">
+      <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm1 17h-2v-2h2v2zm1.8-7.1-.9.9c-.7.7-1 1.2-1 2.2h-2v-.5c0-1 .4-1.8 1.1-2.5l1.2-1.3c.4-.3.6-.8.6-1.4a2.2 2.2 0 0 0-4.4 0H7.4a4.2 4.2 0 1 1 8.4 0c0 .9-.4 1.7-1 2.6z"/></svg>
+    </button>
+  </div>
+</header>
+
+<!-- ===================== Panel kiri ===================== -->
+<aside id="panel-kiri" class="panel">
+  <button class="panel-pelipat" data-sasaran="panel-kiri" aria-label="Buka tutup panel benda langit">
+    <span>Benda Langit</span><i class="panah"></i>
+  </button>
+  <div class="panel-isi">
+    <h2 class="panel-judul">Benda Langit</h2>
+    <div id="daftar-benda" class="daftar-benda"></div>
+
+    <h2 class="panel-judul">Tampilan</h2>
+    <div class="sakelar-grup">
+      <label class="sakelar"><input type="checkbox" id="tg-orbit" checked><span class="sakelar-rel"><i></i></span><span class="sakelar-teks">Garis orbit</span></label>
+      <label class="sakelar"><input type="checkbox" id="tg-label" checked><span class="sakelar-rel"><i></i></span><span class="sakelar-teks">Nama benda</span></label>
+      <label class="sakelar"><input type="checkbox" id="tg-sabuk" checked><span class="sakelar-rel"><i></i></span><span class="sakelar-teks">Sabuk asteroid &amp; Kuiper</span></label>
+      <label class="sakelar"><input type="checkbox" id="tg-sumbu"><span class="sakelar-rel"><i></i></span><span class="sakelar-teks">Sumbu rotasi</span></label>
+      <label class="sakelar"><input type="checkbox" id="tg-ekliptika"><span class="sakelar-rel"><i></i></span><span class="sakelar-teks">Bidang ekliptika</span></label>
+      <label class="sakelar"><input type="checkbox" id="tg-bintang" checked><span class="sakelar-rel"><i></i></span><span class="sakelar-teks">Latar bintang</span></label>
+    </div>
+
+    <h2 class="panel-judul">Skala</h2>
+    <div class="pilihan-skala" role="radiogroup" aria-label="Mode skala">
+      <button class="aktif" data-skala="terlihat" role="radio" aria-checked="true">Terlihat</button>
+      <button data-skala="nyata" role="radio" aria-checked="false">Nyata</button>
+    </div>
+    <p id="catatan-skala" class="catatan-skala">Ukuran &amp; jarak dimampatkan agar seluruh Tata Surya mudah diamati dalam satu layar.</p>
+
+    <h2 class="panel-judul">Belajar</h2>
+    <div class="tombol-tumpuk">
+      <button class="tombol" id="btn-tur"><span class="ikon">▶</span> Tur terpandu</button>
+      <button class="tombol" id="btn-kuis"><span class="ikon">?</span> Kuis (10 soal)</button>
+      <button class="tombol" id="btn-banding"><span class="ikon">↔</span> Bandingkan ukuran</button>
+      <button class="tombol" id="btn-tabel"><span class="ikon">▤</span> Tabel data lengkap</button>
+      <button class="tombol" id="btn-materi"><span class="ikon">≡</span> Materi ringkas</button>
+    </div>
+  </div>
+</aside>
+
+<!-- ===================== Panel kanan ===================== -->
+<aside id="panel-kanan" class="panel">
+  <button class="panel-pelipat" data-sasaran="panel-kanan" aria-label="Buka tutup panel informasi">
+    <span>Informasi</span><i class="panah"></i>
+  </button>
+  <div class="panel-isi" id="isi-info">
+    <div class="kosong">
+      <div class="kosong-ikon">🪐</div>
+      <p>Klik salah satu planet di layar atau pada daftar <em>Benda Langit</em> untuk melihat datanya.</p>
+    </div>
+  </div>
+</aside>
+
+<!-- ===================== Narasi tur ===================== -->
+<div id="narasi-tur" class="narasi-tur" hidden>
+  <div class="narasi-isi">
+    <div class="narasi-kepala"><span id="narasi-langkah">Langkah 1/10</span><button id="narasi-tutup" aria-label="Tutup tur">✕</button></div>
+    <h3 id="narasi-judul">Matahari</h3>
+    <p id="narasi-teks"></p>
+    <div class="narasi-bar"><div id="narasi-kemajuan"></div></div>
+    <div class="narasi-aksi">
+      <button class="tombol-mini" id="narasi-mundur">◀ Sebelumnya</button>
+      <button class="tombol-mini" id="narasi-jeda">Jeda</button>
+      <button class="tombol-mini" id="narasi-maju">Berikutnya ▶</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== Modal ===================== -->
+<div id="modal" class="modal" hidden>
+  <div class="modal-latar" data-tutup="1"></div>
+  <div class="modal-kotak" role="dialog" aria-modal="true" aria-labelledby="modal-judul">
+    <div class="modal-kepala">
+      <h2 id="modal-judul">Judul</h2>
+      <button id="modal-tutup" aria-label="Tutup">✕</button>
+    </div>
+    <div class="modal-isi" id="modal-isi"></div>
+    <div class="modal-kaki" id="modal-kaki"></div>
+  </div>
+</div>
+
+<script>
+/*__THREE__*/
+</script>
+<script>
+/*__DATA__*/
+</script>
+<script>
+/*__TEXTURES__*/
+</script>
+<script>
+/*__SOLAR__*/
+</script>
+<script>
+/*__APP__*/
+</script>
+</body>
+</html>
